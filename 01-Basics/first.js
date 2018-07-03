@@ -4,7 +4,6 @@
  */
 
 function filterObject(obj, keys){
-
     let arrOfKeys = Object.keys(obj);
     let res={};
     for (let key of keys) {
@@ -17,12 +16,7 @@ function filterObject(obj, keys){
 }
 
 function filterObjectWithReduce(obj, keys){
-    //TODO
     let arrOfKeys = Object.keys(obj);
-
-    // return keys.reduce((acc, val) => {
-    //   return arrOfKeys.includes(val) ? {...acc, {[val]: obj[val]}} : acc;
-    // }, {});
     return keys.reduce((acc, val) => {
         if (arrOfKeys.includes(val)) {
             acc[val]= obj[val]
@@ -32,7 +26,6 @@ function filterObjectWithReduce(obj, keys){
 }
 
 const obj = {key1: 1, key2: 2, key3: 3}, keys = ['key1', 'key5', 'key2'];
-// console.log(filterObject(obj, keys));
+console.log(filterObject(obj, keys));
+console.log("----")
 console.log(filterObjectWithReduce(obj, keys));
-// console.log("----")
-// console.log(filterObject(obj, keys));
