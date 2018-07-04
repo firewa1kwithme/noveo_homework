@@ -19,7 +19,7 @@ class Clock {
         }, this.tickTimeout);
     }
     stop() {
-        setTimeout(() => {clearTimeout(this.intervalId)}, this.endTimeout);
+        setTimeout(() => {clearTimeout(this.intervalId);}, this.endTimeout);
     }
 }
 
