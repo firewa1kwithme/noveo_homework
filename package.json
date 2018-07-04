@@ -1,0 +1,41 @@
+{
+    "name": "setup-environment",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "start:dev": "NODE_ENV=development webpack-dev-server --progress",
+        "start:prod": "NODE_ENV=production webpack --progress",
+        "analyze:bundle": "NODE_ENV=production webpack --progress --profile --json > stats.json && mv stats.json public/ && webpack-bundle-analyzer --exclude /assets/ -s gzip public/stats.json",
+        "analyze:eslint": "./node_modules/.bin/eslint *.js src/**/*.js"
+    },
+    "devDependencies": {
+        "autoprefixer": "^8.5.1",
+        "babel-core": "^6.26.3",
+        "babel-eslint": "^8.2.3",
+        "babel-loader": "^7.1.4",
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-react": "^6.24.1",
+        "clean-webpack-plugin": "^0.1.19",
+        "css-loader": "^0.28.11",
+        "csscomb": "^4.2.0",
+        "eslint": "^4.19.1",
+        "eslint-plugin-react": "^7.8.2",
+        "extract-text-webpack-plugin": "^4.0.0-beta.0",
+        "file-loader": "^1.1.11",
+        "html-webpack-plugin": "^3.2.0",
+        "node-sass": "^4.9.0",
+        "postcss-loader": "^2.1.5",
+        "sass-loader": "^7.0.1",
+        "style-loader": "^0.21.0",
+        "uglifyjs-webpack-plugin": "^1.2.5",
+        "webpack": "^4.8.3",
+        "webpack-bundle-analyzer": "^2.13.1",
+        "webpack-cli": "^2.1.4",
+        "webpack-dev-server": "^3.1.4"
+    },
+    "dependencies": {
+    }
+}
