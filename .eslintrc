@@ -170,6 +170,7 @@
         "no-constant-condition": "off",
         "no-case-declarations": "off",
         "no-unused-vars": "off",
+        "no-console": "off",
         "no-fallthrough": "off",
         "wrap-regex": "off",
         "linebreak-style": "off",
