@@ -3,13 +3,18 @@
  * Проверьте работу функции на функции суммирования.
  */
 const b = 10;
+
 function sum(a) {
-    return a + b;
+    if (this.b !== undefined) {
+        return a + this.b;
+    } else {
+        return a + b;
+    }
 }
 
 function myBind(context, func) {
-    return function(value) {
-        return func.call(context, value);
+    return function(val) {
+        return func.call(context, val);
     };
 }
 
