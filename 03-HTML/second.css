@@ -1,0 +1,12 @@
+
+ul > li:first-child > ul > li:nth-child(2) {
+    color: green;
+}
+
+ul li:last-child > ul > li:last-child {
+    color: green;
+}
+
+div > ul > li:nth-child(2n):first-line {
+    color: green;
+}
