@@ -1,21 +1,23 @@
-/*
+// global = global || window;
+/**
  * Напишите сами функцию bind, которая позволяет привязать контекст (значение this) к функции.
  * Проверьте работу функции на функции суммирования.
  */
-this.b = 10;
-const obj1 = {b: 2};
+global.b = 10;
+global.a = 1;
+const obj1 = {b: 2, a: 1};
 
-function sum(a) {
-    return a + this.b;
+function sum() {
+    return this.a + this.b;
 }
 
 function myBind(context, func) {
-    return (val) => func.call(context, val);
+    return (...args) => func.call(context, args);
 }
 
-const test1 = myBind(this, sum);
+const test1 = myBind(global, sum);
 test1(3); //13
-console.log(test1(3));
+console.log(test1());
 
 const test2 = myBind(obj1, sum);
-console.log(test2(2)); //4
+console.log(test2()); //4

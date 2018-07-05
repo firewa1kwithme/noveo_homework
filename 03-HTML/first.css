@@ -1,0 +1,27 @@
+div {
+    color: red;
+}
+
+div ul>li>ul>li+li {
+    color: black;
+}
+
+div ul>li+li {
+    color: black;
+}
+
+div ul>li~li+li {
+    color: red;
+}
+
+div ul>li+li+li+li {
+    color: black;
+}
+
+div ul>li+li+li+li>ul {
+    color: red;
+}
+
+div ul>li+li~li>ul>li~li+li {
+    color: red;
+}
