@@ -5,6 +5,7 @@
 const b = 10;
 
 function sum(a) {
+    console.log(this);
     if (this.b !== undefined) {
         return a + this.b;
     } else {
@@ -13,9 +14,7 @@ function sum(a) {
 }
 
 function myBind(context, func) {
-    return function(val) {
-        return func.call(context, val);
-    };
+    return (val) => func.call(context, val);
 }
 
 const test1 = myBind(this, sum);
