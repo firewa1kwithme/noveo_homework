@@ -1,0 +1,19 @@
+.styling {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightgoldenrodyellow;
+    color: hsl(338, 62%, 48%);
+    border-color: rgba(175, 160, 155, 1.0);
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+.my_styling {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FAFAD2;
+    color: #C62F66;
+    border-color: #AFA09B;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 5px;
+}
