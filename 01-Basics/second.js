@@ -8,12 +8,20 @@
  */
 
 function filterString(str, excludeWords) {
-    let res = str.split(" ");
-    for(let word in excludeWords) {
+    let res = str.split(` `);
+    for (let word in excludeWords) {
         res.splice(res.indexOf(word));
     }
-    return res.reverse().join(" ");
+    return res.reverse().join(` `);
 }
 
-const str = 'I am a javascript programmer', excludeWords = ['programmer'];
+
+function filterStringTwo(str, excludeWords) {
+    let res = str.split(` `).filter((item) => !excludeWords.includes(item));
+    return res.reverse().join(` `);
+}
+
+const str = `I am a javascript programmer`, excludeWords = ['programmer'];
 console.log(filterString(str, excludeWords));
+console.log(`-----`);
+console.log(filterStringTwo(str, excludeWords));
