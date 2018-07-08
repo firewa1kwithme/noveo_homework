@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Создать блок и два инпута, выводить в инпуты координаты курсора в блоке">
+    <title>Homework 01</title>
+	<style> 
+	#block {
+  		position: relative;
+  		margin-left: 100px;
+  		margin-bottom: 20px;
+  		width: 100px;
+  		height: 100px;
+  		background-color: red; 
+	}
+	</style>
+</head>
+<body>
+	<div id="block"></div>
+	<input type="text" id="x-cursor" value="x">
+	<input type="text" id="y-cursor" value="y">
+	<script>
+		let xCursor = document.querySelector(`#x-cursor`);
+		let yCursor = document.querySelector(`#y-cursor`);
+		function xCoordinate(event){
+  			let x = event.offsetX;
+  			let y = event.offsetY;
+  			console.log(x);
+  			console.log(y);
+  			xCursor.value = x;
+  			yCursor.value = y;
+		};
+		block.addEventListener('mousemove', xCoordinate); 
+	</script>
+</body>
+</html>

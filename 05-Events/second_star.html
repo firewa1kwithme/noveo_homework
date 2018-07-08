@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Разработать toolTip, который будет срабатывать на элементах, у которых указан атрибут data-tooltip=”text”. Если элементы вложены друг в друга, выводить тултип у самого вложенного. Появляться тултип должен при наведении, под серединой элемента">
+  <title>Homework star</title>
+  <style type="text/css">
+    #third {
+      height: 20px;
+      width: 20px;
+      background-color: gray;
+    }
+    #first {
+      height: 100px;
+      width: 100px;
+      background-color: red;
+    }
+    #second{
+      height: 50px;
+      width: 50px;
+      background-color: green;
+    }
+    .tooltip {
+      position: absolute;
+      padding: 2px 5px;
+      border: 1px solid thistle;
+      text-align: center;
+      background-color: rgb(253, 250, 245);
+    }
+  </style>
+</head>
+<body>
+  <div id="first" data-tooltip="text">
+    <div id="second" data-tooltip="text"></div>
+  </div>
+  <div id="third"></div>
+  <script>
+    let first = document.querySelector(`#first`);
+    let globalToolTip = null;
+    // let needed = document.dataset.tooltip(`text`);
+    function toolTip(event){
+      if (event.target.dataset.tooltip = `text`) {
+        let elementId = event.target.id;
+        let newToolTip = document.createElement(`div`);
+        newToolTip.className = `tooltip`;
+        newToolTip.innerHTML = elementId;
+        document.body.appendChild(newToolTip);
+        globalToolTip = newToolTip;
+      }
+    };
+    function toolTipTwo(){
+      if (globalToolTip) {
+        document.body.removeChild(globalToolTip);
+        globalToolTip = null;
+      }
+    }
+    document.addEventListener('mouseover', toolTip);
+    document.addEventListener('mouseout', toolTipTwo);
+  </script>
+</body>
+</html>
