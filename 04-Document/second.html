@@ -6,7 +6,7 @@
     <title>Homework 2</title>
     <style>
       .orders-list {
-        background-color: blue;
+        background-color: grey;
       }
     </style>
 </head>
@@ -23,9 +23,9 @@
     </ul>
   </div>
   <script>
-    let lastEl = document.querySelector(`.orders-list`).lastChild;
+    let lastEl = document.querySelector(`.orders-list`).lastElementChild;
     let lastEl2 = lastEl.cloneNode(true);
-    // lastEl2.style.backgroundColor = `red`;
+    lastEl2.style.backgroundColor = `red`;
     lastEl2.innerHTML = `Cancel`;
     lastEl.parentNode.insertBefore(lastEl2, lastEl.nextSibling);
   </script>
