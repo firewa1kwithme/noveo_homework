@@ -21,7 +21,7 @@
       background-color: green;
     }
     .tooltip {
-      position: absolute;
+      position: fixed;
       padding: 2px 5px;
       border: 1px solid thistle;
       text-align: center;
@@ -35,19 +35,21 @@
   </div>
   <div id="third"></div>
   <script>
-    let first = document.querySelector(`#first`);
     let globalToolTip = null;
-    // let needed = document.dataset.tooltip(`text`);
-    function toolTip(event){
-      if (event.target.dataset.tooltip = `text`) {
+
+    function toolTip(event){  
+      if (event.target.dataset.tooltip === `text`) {
         let elementId = event.target.id;
         let newToolTip = document.createElement(`div`);
         newToolTip.className = `tooltip`;
         newToolTip.innerHTML = elementId;
+        newToolTip.style.left = event.target.offsetLeft + event.target.offsetWidth/2 + `px`;
+        newToolTip.style.top = event.target.offsetTop + event.target.offsetHeight/2 + `px`;
         document.body.appendChild(newToolTip);
         globalToolTip = newToolTip;
       }
     };
+
     function toolTipTwo(){
       if (globalToolTip) {
         document.body.removeChild(globalToolTip);
