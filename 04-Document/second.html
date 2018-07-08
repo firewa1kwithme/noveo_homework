@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Клонировать последний элемент .orders-list, сделать его background красным, поменять текст на 'Cancel' и добавить его на страницу вслед за исходным элементом.Подсказка: можно написать вспомогательную функцию insertAfter, т.к.существует только insertBefore">
+    <title>Homework 2</title>
+    <style>
+      .orders-list {
+        background-color: blue;
+      }
+    </style>
+</head>
+<body>
+  <div class="orders-list">
+    <ul> First Child
+        <li>First</li>
+        <li>Second</li>
+        <li>Third</li>
+    </ul>
+    <ul> Second Child
+      <li>First</li>
+      <li>Second</li>
+    </ul>
+  </div>
+  <script>
+    let lastEl = document.querySelector(`.orders-list`).lastChild;
+    let lastEl2 = lastEl.cloneNode(true);
+    // lastEl2.style.backgroundColor = `red`;
+    lastEl2.innerHTML = `Cancel`;
+    lastEl.parentNode.insertBefore(lastEl2, lastEl.nextSibling);
+  </script>
+</body>
+</html>

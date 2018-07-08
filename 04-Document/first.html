@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Получить первый дочерние элемент из .orders-list и добавить в него текст,состоящий не менее чем из 50 символов">
+    <title>Homework 1</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="orders-list">
+    <ul> First Child
+        <li>First</li>
+        <li>Second</li>
+        <li>Third</li>
+    </ul>
+    <ul> Second Child
+      <li>First</li>
+      <li>Second</li>
+    </ul>
+  </div>
+  <script>
+    let ordersListFirstChild = document.querySelector(`.orders-list`).firstElementChild;
+
+	function fiftySymbols(){
+  		let str = ``;
+  		for (let i = 0; i < 50; i++) {
+    		str += `A`;
+  		}
+  		return str + `!`;
+	}
+	// ordersListFirstChild.innerHTML += fiftySymbols();
+	console.log(ordersListFirstChild.firstChild.nodeValue);
+	/**
+ 	* If the node is an element node, the nodeValue property
+ 	* will return null.
+ 	* Note: If you want to return the text of an element,
+ 	* remember that text is always inside a Text node, and
+ 	* you will have to return the Text node's node value
+ 	* (element.childNodes[0].nodeValue).
+	*/
+	setTimeout(()=>ordersListFirstChild.firstChild.nodeValue += fiftySymbols(), 1000);
+  </script>
+</body>
+</html>
