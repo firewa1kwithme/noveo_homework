@@ -24,10 +24,17 @@
   </div>
   <script>
     let lastEl = document.querySelector(`.orders-list`).lastElementChild;
+    console.log(lastEl.firstChild.nodeValue);
     let lastEl2 = lastEl.cloneNode(true);
     lastEl2.style.backgroundColor = `red`;
     lastEl2.innerHTML = `Cancel`;
-    lastEl.parentNode.insertBefore(lastEl2, lastEl.nextSibling);
+    // lastEl.parentNode.insertBefore(lastEl2, lastEl.nextSibling);
+
+    function insertAfter(elem, elem2) {
+      let parent = elem2.parentNode;
+      elem2.nextSibling ? parent.insertBefore(elem, elem2.nextSibling) : parent.appendChild(elem)
+    }
+    setTimeout(()=>insertAfter(lastEl2, lastEl), 2000);
   </script>
 </body>
 </html>
