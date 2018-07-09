@@ -6,26 +6,20 @@
     <title>Homework 2</title>
     <style>
       .orders-list {
-        background-color: grey;
+        background-color: white;
       }
     </style>
 </head>
 <body>
-  <div class="orders-list">
-    <ul> First Child
+    <ul class="orders-list">
         <li>First</li>
         <li>Second</li>
         <li>Third</li>
     </ul>
-    <ul> Second Child
-      <li>First</li>
-      <li>Second</li>
-    </ul>
-  </div>
   <script>
-    let lastEl = document.querySelector(`.orders-list`).lastElementChild;
+    const lastEl = document.querySelector(`.orders-list`).lastElementChild;
     console.log(lastEl.firstChild.nodeValue);
-    let lastEl2 = lastEl.cloneNode(true);
+    const lastEl2 = lastEl.cloneNode();
     lastEl2.style.backgroundColor = `red`;
     lastEl2.innerHTML = `Cancel`;
     // lastEl.parentNode.insertBefore(lastEl2, lastEl.nextSibling);

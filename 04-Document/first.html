@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="description" content="Получить первый дочерние элемент из .orders-list и добавить в него текст,состоящий не менее чем из 50 символов">
     <title>Homework 1</title>
-    <link rel="stylesheet" href="index.css">
+    <style></style>
 </head>
 <body>
   <div class="orders-list">
-    <ul> First Child
+    <ul>
         <li>First</li>
         <li>Second</li>
         <li>Third</li>
@@ -19,8 +19,11 @@
     </ul>
   </div>
   <script>
-    let ordersListFirstChild = document.querySelector(`.orders-list`).firstElementChild;
-
+    let ordersListFirstChild = document.querySelector(`.orders-list > ul`).firstElementChild;
+    console.log(ordersListFirstChild);
+    console.log(ordersListFirstChild.nodeValue);
+    console.log(ordersListFirstChild.firstChild);
+    console.log(ordersListFirstChild.firstChild.nodeValue);
 	function fiftySymbols(){
   		let str = ``;
   		for (let i = 0; i < 50; i++) {
@@ -29,7 +32,6 @@
   		return str + `!`;
 	}
 	// ordersListFirstChild.innerHTML += fiftySymbols();
-	console.log(ordersListFirstChild.firstChild.nodeValue);
 	/**
  	* If the node is an element node, the nodeValue property
  	* will return null.

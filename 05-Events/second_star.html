@@ -5,59 +5,70 @@
   <meta name="description" content="Разработать toolTip, который будет срабатывать на элементах, у которых указан атрибут data-tooltip=”text”. Если элементы вложены друг в друга, выводить тултип у самого вложенного. Появляться тултип должен при наведении, под серединой элемента">
   <title>Homework star</title>
   <style type="text/css">
-    #third {
-      height: 20px;
-      width: 20px;
-      background-color: gray;
-    }
+
     #first {
-      height: 100px;
-      width: 100px;
-      background-color: red;
+        height: 500px;
+        width: 500px;
+        background-color: red;
     }
     #second{
-      height: 50px;
-      width: 50px;
-      background-color: green;
+        height: 100px;
+        width: 100px;
+        background-color: green;
+    }
+    #third {
+        height: 100px;
+        width: 100px;
+        background-color: gray;
+    }
+    #force {
+        height: 200px;
+        width: 30px;
+        background-color: aqua;
     }
     .tooltip {
-      position: fixed;
-      padding: 2px 5px;
-      border: 1px solid thistle;
-      text-align: center;
-      background-color: rgb(253, 250, 245);
+        position: fixed;
+        padding: 2px 5px;
+        border: 1px solid thistle;
+        text-align: center;
+        background-color: rgb(253, 250, 245);
     }
   </style>
 </head>
 <body>
-  <div id="first" data-tooltip="text">
-    <div id="second" data-tooltip="text"></div>
+  <div id="first" data-tooltip="first_tooltip">
+    <div id="second"></div>
   </div>
-  <div id="third"></div>
+  <div id="third" data-tooltip="third_tooltip">
+      <div id="force" data-tooltip="f_tooltip"></div>
+  </div>
   <script>
     let globalToolTip = null;
 
-    function toolTip(event){  
-      if (event.target.dataset.tooltip === `text`) {
-        let elementId = event.target.id;
-        let newToolTip = document.createElement(`div`);
-        newToolTip.className = `tooltip`;
-        newToolTip.innerHTML = elementId;
-        newToolTip.style.left = event.target.offsetLeft + event.target.offsetWidth/2 + `px`;
-        newToolTip.style.top = event.target.offsetTop + event.target.offsetHeight/2 + `px`;
-        document.body.appendChild(newToolTip);
-        globalToolTip = newToolTip;
-      }
-    };
+    function createToolTip(event){
+        if (event.target.dataset.tooltip) {
+            let elementToolTip = event.target.dataset.tooltip;
+            let newToolTip = document.createElement(`div`);
+            newToolTip.className = `tooltip`;
+            newToolTip.innerHTML = elementToolTip;
+            let box = event.target.getBoundingClientRect();
+            console.log(box);
+            event.target.appendChild(newToolTip);
+            console.log(newToolTip.offsetWidth);
+            newToolTip.style.left = box.left + box.width/2 - newToolTip.offsetWidth/2 + `px`;newToolTip.style.top = event.target.offsetTop + event.target.offsetHeight + `px`;
+            event.target.appendChild(newToolTip);
+            globalToolTip = newToolTip;
+        }
+    }
 
-    function toolTipTwo(){
+    function removeTooltip(){
       if (globalToolTip) {
-        document.body.removeChild(globalToolTip);
+          event.target.removeChild(globalToolTip);
         globalToolTip = null;
       }
     }
-    document.addEventListener('mouseover', toolTip);
-    document.addEventListener('mouseout', toolTipTwo);
+    document.addEventListener('mouseover', createToolTip);
+    document.addEventListener('mouseout', removeTooltip);
   </script>
 </body>
 </html>
