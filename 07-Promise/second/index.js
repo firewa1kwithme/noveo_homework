@@ -5,9 +5,11 @@ const newDiv = document.createElement('div');
 
 class PromisedXHR {
 
+    constructor () {
+        this.xhr = new XMLHttpRequest();
+    }
     getData(url) {
         return new Promise((resolve, reject) => {
-            this.xhr = new XMLHttpRequest();
             this.xhr.open('GET', url, true);
 
             this.xhr.onload = () => {
@@ -27,15 +29,19 @@ class PromisedXHR {
         });
     }
     cancel() {
-        return new Promise((resolve, reject) => {
-            if (this.xhr.readyState === 1) {
-                this.xhr.abort();
-                resolve('cancelled');
-            } else {
-                const error = new Error(this.xhr.statusText);
-                reject(error);
-            }
-        });
+        // return new Promise((resolve, reject) => {
+        //     if (this.xhr.readyState === this.xhr.OPENED) {
+        //         this.xhr.abort();
+        //         resolve('cancelled');
+        //     } else {
+        //         const error = new Error(this.xhr.statusText);
+        //         this.xhr.abort();
+        //         reject(error);
+        //     }
+        // });
+        if (this.xhr.readyState === this.xhr.OPENED) {
+            this.xhr.abort();
+        }
     }
 }
 
@@ -63,6 +69,10 @@ function throttling(func, delay) {
 function getAvatar() {
     const nickname = document.querySelector('#username').value;
     pxhr.getData(`https://api.github.com/users/${nickname}`)
+        .then((result) => {
+            pxhr.cancel();
+            return result;
+        })
         .then(parseJSON)
         .then(({avatar_url}) => {
             img.src = avatar_url;
@@ -74,12 +84,11 @@ function getAvatar() {
             block.appendChild(newDiv);
             console.log(message);
         });
+    // pxhr.cancel();
 }
 
-const throttledGetAvatar = throttling(getAvatar, 3000);
+const throttledGetAvatar = throttling(getAvatar, 2000);
 
 input.addEventListener('input', () => {
-    getAvatar();
-    pxhr.cancel().then(console.log('cancelled')).catch(({message}) => {console.log(message);});
     throttledGetAvatar();
 });
