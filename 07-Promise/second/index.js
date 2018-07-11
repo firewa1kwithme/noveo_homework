@@ -1,32 +1,40 @@
 const input = document.querySelector('#username');
 const block = document.querySelector('#block');
 const img = document.querySelector('#img');
-
+const newDiv = document.createElement('div');
 
 class PromisedXHR {
-    constructor() {
-        this.cancel = null;
-    }
+
     getData(url) {
         return new Promise((resolve, reject) => {
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
+            this.xhr = new XMLHttpRequest();
+            this.xhr.open('GET', url, true);
 
-            xhr.onload = () => {
-                if (xhr.status === 200) {
-                    resolve(xhr.responseText);
+            this.xhr.onload = () => {
+                if (this.xhr.status === 200) {
+                    resolve(this.xhr.responseText);
                 } else {
-                    const error = new Error(xhr.statusText);
+                    const error = new Error(this.xhr.statusText);
                     reject(error);
                 }
             };
 
-            xhr.onerror = () => {
+            this.xhr.onerror = () => {
                 reject(new Error('Some error occured'));
             };
-            this.cancel = xhr.abort;
 
-            xhr.send();
+            this.xhr.send();
+        });
+    }
+    cancel() {
+        return new Promise((resolve, reject) => {
+            if (this.xhr.readyState === 1) {
+                this.xhr.abort();
+                resolve('cancelled');
+            } else {
+                const error = new Error(this.xhr.statusText);
+                reject(error);
+            }
         });
     }
 }
@@ -43,18 +51,35 @@ function parseJSON(data) {
     });
 }
 
-//TODO: race с throttling
-function func() {
+function throttling(func, delay) {
+    let timer = null;
+    return () => {
+        clearTimeout(timer);
+        timer = setTimeout(func, delay);
+    };
+}
 
+
+function getAvatar() {
     const nickname = document.querySelector('#username').value;
     pxhr.getData(`https://api.github.com/users/${nickname}`)
         .then(parseJSON)
-        .then(result => {
-            console.log(result);
+        .then(({avatar_url}) => {
+            img.src = avatar_url;
+            console.log('get');
         })
-        .catch(error => {
-            console.log(error.message);
+        .catch(({message}) => {
+            img.src = 'error.png';
+            newDiv.innerHTML = `Error: ${message}`;
+            block.appendChild(newDiv);
+            console.log(message);
         });
 }
 
-input.addEventListener('keyup', func);
+const throttledGetAvatar = throttling(getAvatar, 3000);
+
+input.addEventListener('input', () => {
+    getAvatar();
+    pxhr.cancel().then(console.log('cancelled')).catch(({message}) => {console.log(message);});
+    throttledGetAvatar();
+});
